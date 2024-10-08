@@ -15,7 +15,7 @@ class Grass:
 
 class Boy:
     def __init__(self):
-        self.x, self.y = random.randint(100, 700), 90
+        self.x, self.y = random.randint(10, 200), 90
         self.frame= 0
         self.image = load_image('run_animation.png')
 
@@ -26,6 +26,26 @@ class Boy:
     def draw(self):
         self.image.clip_draw(self.frame*100, 0, 100, 100, self.x, self.y)
     pass
+
+class Ball:
+    def __init__(self):
+        self.x, self.y = random.randint(0,700), 599
+        self.speed = random.randint(5, 15)
+        self.image = load_image('ball21x21.png')
+        self.image2 = load_image('ball41x41.png')
+        self.i = random.randint(0, 1)
+
+    def update(self):
+        if self.y >=80 and self.i == 1:
+            self.y -= self.speed
+        elif self.y >=50 and self.i == 0:
+            self.y -= self.speed
+    def draw(self):
+        if self.i == 0:
+            self.image.draw(self.x,self.y)
+        else:
+            self.image2.draw(self.x, self.y)
+
 
 def handle_events():
     global running
@@ -52,14 +72,18 @@ def reset_world():
     global grass
     global boy
     global team
+    global ball
     global world
+
 
     running = True
     world = []
     grass = Grass() # Grass 클래스를 이용해서 grass 객체를 생성
     world.append(grass)
+    ball = [Ball() for i in range(20)]
     team = [Boy() for i in range(10)]
     world += team
+    world += ball
 
 open_canvas()
 
