@@ -36,9 +36,9 @@ class Ball:
         self.i = random.randint(0, 1)
 
     def update(self):
-        if self.y >=80 and self.i == 1:
+        if self.y >=71 and self.i == 1:
             self.y -= self.speed
-        elif self.y >=50 and self.i == 0:
+        elif self.y >=61 and self.i == 0:
             self.y -= self.speed
     def draw(self):
         if self.i == 0:
